@@ -1,1 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Silvio Campos | Sports, Documentary and Editorial Photographer in Miami</title>
+    <meta
+      name="description"
+      content="Miami-based sports, documentary and editorial photographer available for assignments throughout South Florida and nationwide."
+    >
+    <meta property="og:title" content="Silvio Campos | Photographer in Miami">
+    <meta
+      property="og:description"
+      content="Sports, documentary and editorial photography based in Miami."
+    >
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
+    <header class="site-header" id="top">
+      <a class="brand" href="#home" aria-label="Silvio Campos home">
+        <span>Silvio Campos</span>
+        <small>Photography / Writing</small>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">
+        Menu
+      </button>
+      <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home" aria-labelledby="heroTitle">
+        <div class="hero__media" aria-hidden="true"></div>
+        <div class="hero__shade" aria-hidden="true"></div>
+        <div class="hero__content">
+          <p class="eyebrow">Miami, Florida / Available for assignments and travel</p>
+          <h1 id="heroTitle">Sports, documentary and editorial photography based in Miami.</h1>
+          <p class="hero__statement">
+            I don't photograph the spectacle. I photograph what the spectacle tries to hide.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--light" href="#work">View Selected Work</a>
+            <a class="button button--solid" href="#contact">Book an Assignment</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--intro" aria-labelledby="introTitle">
+        <div class="section__label">
+          <p class="eyebrow">Position</p>
+        </div>
+        <div class="intro-copy">
+          <h2 id="introTitle">The body under pressure, stripped of the mythology of victory.</h2>
+          <p>
+            Work across sports coverage, documentary assignments, editorial portraiture, events,
+            press coverage, image licensing, and workshops.
+          </p>
+        </div>
+        <dl class="facts" aria-label="Site highlights">
+          <div>
+            <dt>Miami</dt>
+            <dd>South Florida base</dd>
+          </div>
+          <div>
+            <dt>Travel</dt>
+            <dd>Nationwide assignments</dd>
+          </div>
+          <div>
+            <dt>Fast edit</dt>
+            <dd>Selected images during or after events</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="section section--work" id="work" aria-labelledby="workTitle">
+        <div class="section__head">
+          <p class="eyebrow">Selected work</p>
+          <h2 id="workTitle">Pictures for situations that do not behave politely.</h2>
+        </div>
+        <div class="filter-bar" aria-label="Filter selected work">
+          <button class="filter-button is-active" type="button" data-work-filter="All">All</button>
+          <button class="filter-button" type="button" data-work-filter="Sports">Sports</button>
+          <button class="filter-button" type="button" data-work-filter="Documentary">Documentary</button>
+          <button class="filter-button" type="button" data-work-filter="Editorial">Editorial</button>
+          <button class="filter-button" type="button" data-work-filter="Portraits">Portraits</button>
+          <button class="filter-button" type="button" data-work-filter="Events">Events</button>
+        </div>
+        <div class="work-grid" id="workGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="section section--projects" id="projects" aria-labelledby="projectsTitle">
+        <div class="section__head">
+          <p class="eyebrow">Projects</p>
+          <h2 id="projectsTitle">Longer work, fewer excuses.</h2>
+        </div>
+        <div class="project-list" id="projectList"></div>
+      </section>
+
+      <section class="section section--writing" id="writing" aria-labelledby="writingTitle">
+        <div class="section__head">
+          <p class="eyebrow">Writing</p>
+          <h2 id="writingTitle">Texts that interrogate the image after it stops posing.</h2>
+        </div>
+        <div class="writing-layout">
+          <div class="article-list" id="articleList"></div>
+          <article class="article-reader" id="articleReader" tabindex="-1" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="section section--about" id="about" aria-labelledby="aboutTitle">
+        <div class="about-media" aria-hidden="true"></div>
+        <div class="about-copy">
+          <p class="eyebrow">About</p>
+          <h2 id="aboutTitle">Silvio Campos</h2>
+          <p class="about-role">Photographer and writer based in Miami.</p>
+          <p>
+            Silvio Campos works between sports, documentary and editorial photography. His work
+            is interested in bodies, power and everything left outside the official version.
+          </p>
+          <p>
+            He photographs because looking is not always enough. He writes because some images
+            also need to be questioned.
+          </p>
+          <p class="pullquote">
+            When a photograph has teeth, it does not need to write them underneath.
+          </p>
+        </div>
+      </section>
+
+      <section class="section section--assignments" aria-labelledby="assignmentsTitle">
+        <div class="section__head">
+          <p class="eyebrow">Assignments</p>
+          <h2 id="assignmentsTitle">Available in Miami, South Florida and nationwide.</h2>
+        </div>
+        <div class="service-grid">
+          <div>
+            <h3>Coverage</h3>
+            <p>Sports, events, political and press assignments with a documentary eye.</p>
+          </div>
+          <div>
+            <h3>Editorial</h3>
+            <p>Portraits, profiles, publications, licensing and commissioned visual stories.</p>
+          </div>
+          <div>
+            <h3>Delivery</h3>
+            <p>Selected images during the event or immediately after the assignment when needed.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--contact" id="contact" aria-labelledby="contactTitle">
+        <div class="contact-copy">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contactTitle">Request availability.</h2>
+          <p>
+            Send the assignment details: date, location, scope and what needs to happen.
+          </p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <label>
+            <span>Name</span>
+            <input name="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+          <label>
+            <span>Assignment type</span>
+            <select name="projectType">
+              <option value="">Select one</option>
+              <option>Sports coverage</option>
+              <option>Documentary photography</option>
+              <option>Editorial assignment</option>
+              <option>Corporate portrait</option>
+              <option>Event photography</option>
+              <option>Workshop</option>
+            </select>
+          </label>
+          <label>
+            <span>Date</span>
+            <input name="projectDate" type="date">
+          </label>
+          <label>
+            <span>Location</span>
+            <input name="location" autocomplete="address-level2">
+          </label>
+          <label>
+            <span>Budget</span>
+            <select name="budget">
+              <option value="">Select range</option>
+              <option>Under $1,000</option>
+              <option>$1,000 - $2,500</option>
+              <option>$2,500 - $5,000</option>
+              <option>$5,000+</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <label class="span-2">
+            <span>Message</span>
+            <textarea name="message" rows="6" required></textarea>
+          </label>
+          <button class="button button--dark span-2" type="submit">Prepare Email</button>
+          <p class="form-status span-2" id="formStatus" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand" href="#top" aria-label="Back to top">
+        <span>Silvio Campos</span>
+        <small>Photography / Writing</small>
+      </a>
+      <p>Sports, documentary and editorial photography based in Miami.</p>
+    </footer>
+
+    <script src="data/data.js"></script>
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>
