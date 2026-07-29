@@ -6,6 +6,7 @@
       location: "Miami / Nationwide",
       eventName: "Field pressure",
       summary: "The body under pressure, stripped of the mythology of victory.",
+      image: "assets/media/work/sports-coverage.jpg",
       position: "58% center",
     },
     {
@@ -14,6 +15,7 @@
       location: "South Florida",
       eventName: "Street record",
       summary: "Stories built from what remains after the official version leaves the room.",
+      image: "assets/media/work/documentary-photography.jpg",
       position: "42% center",
     },
     {
@@ -22,6 +24,7 @@
       location: "Publications / profiles",
       eventName: "Editorial desk",
       summary: "Images for profiles, essays and visual stories that need more than a clean smile.",
+      image: "assets/media/work/editorial-assignments.jpg",
       position: "68% center",
     },
     {
@@ -30,6 +33,7 @@
       location: "Studio / location",
       eventName: "Portrait sitting",
       summary: "Portraits for people who prefer not to look manufactured by committee.",
+      image: "assets/media/work/portraits.jpg",
       position: "35% center",
     },
     {
@@ -38,6 +42,7 @@
       location: "Political / corporate / cultural",
       eventName: "Press access",
       summary: "Coverage that keeps an eye on the room, not only the podium.",
+      image: "assets/media/work/events-and-press.jpg",
       position: "72% center",
     },
     {
@@ -46,6 +51,7 @@
       location: "Archive / education",
       eventName: "Studio desk",
       summary: "Image licensing, editing sessions and workshops on photographic language.",
+      image: "assets/media/work/licensing-and-workshops.jpg",
       position: "50% center",
     },
   ];
@@ -56,18 +62,21 @@
       meta: "2026 / Essay project",
       line: "A project about perception, delay and the violence of the single point of view.",
       note: "Connected to the writing archive already included in this repository.",
+      image: "assets/media/projects/desfase-fragmentacion-y-violencia.jpg",
     },
     {
       title: "The body under pressure",
       meta: "Sports / Documentary",
       line: "A sustained look at bodies performing under rules, spectacle and exhaustion.",
       note: "A project direction for games, training rooms, sidelines and the seconds after impact.",
+      image: "assets/media/projects/the-body-under-pressure.jpg",
     },
     {
       title: "Archive without nostalgia",
       meta: "Editorial / Writing",
       line: "A way of treating the archive as evidence, not as decoration for better lighting.",
       note: "An editorial frame for images, essays, publications and unfinished evidence.",
+      image: "assets/media/projects/archive-without-nostalgia.jpg",
     },
   ];
 
@@ -103,6 +112,24 @@
       day: "numeric",
       year: "numeric",
     }).format(date);
+  }
+
+  function mediaStack(imagePath) {
+    if (!imagePath) return "var(--editorial-image)";
+    return `url("${imagePath}"), var(--editorial-image)`;
+  }
+
+  function getPostOrderValue(post) {
+    const dateValue = new Date(`${post.date || ""}T00:00:00`).getTime();
+    const idValue = Number.parseInt(post.id || "0", 10);
+    return {
+      date: Number.isNaN(dateValue) ? 0 : dateValue,
+      id: Number.isNaN(idValue) ? 0 : idValue,
+    };
+  }
+
+  function getWritingImage(post) {
+    return post && post.slug ? `assets/media/writing/${post.slug}.jpg` : "";
   }
 
   function preventLongEventRuns(items) {
@@ -145,6 +172,7 @@
       const title = createElement("h3", "", item.title);
       const summary = createElement("p", "", item.summary);
       const visual = createElement("div", "work-card__visual");
+      visual.style.backgroundImage = mediaStack(item.image);
       visual.style.setProperty("--image-position", item.position);
 
       body.append(meta, title, summary);
@@ -160,14 +188,16 @@
     projects.forEach((project, index) => {
       const article = createElement("article", "project-item");
       const number = createElement("small", "", `0${index + 1}`);
+      const visual = createElement("div", "project-item__visual");
       const body = createElement("div");
       const title = createElement("h3", "", project.title);
       const line = createElement("p", "", project.line);
       const note = createElement("p", "project-item__note", project.note);
       const meta = createElement("small", "", project.meta);
 
+      visual.style.backgroundImage = mediaStack(project.image);
       body.append(title, line);
-      article.append(number, body, meta, note);
+      article.append(number, visual, body, meta, note);
       fragment.appendChild(article);
     });
 
@@ -177,7 +207,14 @@
   function getPosts() {
     const blog = window.DESFASE_BLOG;
     if (!blog || !Array.isArray(blog.posts)) return [];
-    return blog.posts.slice(0, 8);
+    return blog.posts
+      .slice()
+      .sort((postA, postB) => {
+        const a = getPostOrderValue(postA);
+        const b = getPostOrderValue(postB);
+        return b.date - a.date || b.id - a.id;
+      })
+      .slice(0, 8);
   }
 
   function renderArticleList() {
@@ -195,19 +232,25 @@
     const fragment = document.createDocumentFragment();
     posts.forEach((post) => {
       const button = createElement("button", "article-card");
+      const media = createElement("span", "article-card__media");
+      const copy = createElement("span", "article-card__copy");
       button.type = "button";
       button.classList.toggle("is-active", post.slug === activeArticleSlug);
       button.setAttribute("aria-pressed", post.slug === activeArticleSlug ? "true" : "false");
+      media.setAttribute("aria-hidden", "true");
+      media.style.backgroundImage = mediaStack(getWritingImage(post));
 
+      const latestLabel = post.slug === posts[0].slug ? "Latest update / " : "";
       const meta = createElement(
         "span",
         "article-card__meta",
-        `${post.category || "Writing"} / ${post.readingTime || 1} min / ${formatDate(post.date)}`
+        `${latestLabel}${post.category || "Writing"} / ${post.readingTime || 1} min / ${formatDate(post.date)}`
       );
       const title = createElement("h3", "", post.displayTitle || post.title);
       const excerpt = createElement("p", "", post.excerpt || "");
 
-      button.append(meta, title, excerpt);
+      copy.append(meta, title, excerpt);
+      button.append(media, copy);
       button.addEventListener("click", () => {
         activeArticleSlug = post.slug;
         renderArticleList();
@@ -228,17 +271,21 @@
     const meta = createElement(
       "p",
       "article-card__meta",
-      `${post.category || "Writing"} / ${post.readingTime || 1} min / ${formatDate(post.date)}`
+      `${post.slug === posts[0].slug ? "Latest update / " : ""}${post.category || "Writing"} / ${post.readingTime || 1} min / ${formatDate(post.date)}`
     );
+    const media = createElement("div", "article-reader__media");
     const title = createElement("h3", "", post.displayTitle || post.title);
     const excerpt = createElement("p", "", post.excerpt || "");
     const body = createElement("div", "article-reader__body");
+
+    media.setAttribute("aria-hidden", "true");
+    media.style.backgroundImage = mediaStack(getWritingImage(post));
 
     (post.paragraphs || []).slice(0, 10).forEach((paragraph) => {
       body.appendChild(createElement("p", "", paragraph));
     });
 
-    selectors.articleReader.replaceChildren(meta, title, excerpt, body);
+    selectors.articleReader.replaceChildren(media, meta, title, excerpt, body);
   }
 
   function updateFilterButtons() {
